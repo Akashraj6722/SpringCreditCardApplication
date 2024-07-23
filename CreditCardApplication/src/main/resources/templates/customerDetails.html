@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/buttons/2.1.0/css/buttons.dataTables.min.css">
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<title>Customer Details</title>
+</head>
+<body>
+	<div class="header bg-primary text-white text-center p-3 mb-4">
+		<a href="AdminPage.jsp" class="text-white mr-3"><i
+			class="fa-solid fa-arrow-left-long"></i></a> <img alt="logo"
+			src="images/logo-no-background.png" style="width: 150px;">
+	</div>
+
+	<div class="container">
+		<table id="customerDetails"
+			class="table table-striped table-bordered table-light">
+			<thead class="thead-dark">
+				<tr>
+					<th>Customer's ID</th>
+					<th>Name</th>
+					<th>DOB</th>
+					<th>Aadhaar Number</th>
+					<th>Aadhaar Proof</th>
+					<th>PAN</th>
+					<th>PAN Proof</th>
+					<th>E-Mail</th>
+					<th>Phone Number</th>
+				</tr>
+			</thead>
+			 <tbody>
+        <tr th:each="userDetails : ${details}">
+            <td th:text="${userDetails.customerID}"></td>
+            <td th:text="${userDetails.fName} + ' ' + ${userDetails.lName}"></td>
+            <td th:text="${userDetails.dob}"></td>
+            <td th:text="${userDetails.aadhaar}"></td>
+            <td class="Img">
+                <img th:if="${aadhaarImage}" 
+                     th:src="'data:image/jpeg;base64,' + ${aadhaarImage}" 
+                     width="100px" height="100px" alt="Aadhaar Proof">
+            </td>
+            <td th:text="${userDetails.pan}"></td>
+            <td class="Img">
+                <img th:if="${panImage}" 
+                     th:src="'data:image/jpeg;base64,' + ${panImage}" 
+                     width="100px" height="100px" alt="PAN Proof">
+            </td>
+            <td th:text="${userDetails.mail}"></td>
+            <td th:text="${userDetails.phone}"></td>
+        </tr>
+    </tbody>
+		</table>
+	</div>
+
+
+
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+	<script
+		src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			$('#customerDetails').DataTable({
+				dom : 'Bfrtip',
+				buttons : [ 'pdf',
+				/*          {
+				             extend: 'pdf',
+				             text: 'Save current page',
+				             exportOptions: {
+				                 modifier: {
+				                     page: 'current'
+				                 }
+				             }
+				         } */
+				]
+			});
+		});
+	</script>
+
+
+</body>
+<style>
+a {
+	color: white;
+}
+
+a:hover {
+	color: black;
+}
+
+.Img:hover {
+	transform: scale(2);
+}
+
+.header {
+	margin-bottom: 20px;
+}
+
+body {
+	background-color: blanchedalmond;
+}
+
+table, th, td {
+	border: solid black 2px;
+	border-collapse: collapse;
+}
+
+th, td {
+	padding: 10px;
+}
+
+th {
+	background-color: #f2f2f2;
+}
+</style>
+</html>

@@ -1,0 +1,208 @@
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<title>Insert title here</title>
+</head>
+<body>
+	<!--  <div th:if="${session == null or session.getAttribute('values') == null}">
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            window.location.href = /*[[@{/mainPage.jsp}]]*/ '';
+            /*]]>*/
+        </script>
+    </div> -->
+	<div class="header">
+
+		
+			<img alt="" src="images/logo-no-background.png" style="width: 150px;">
+		
+
+	</div>
+	<div class="sidebar">
+
+		<a href="#home"><i class="fa-solid fa-house"></i>Home</a>
+
+	 <form action="accountDetails" method="post">
+	 
+			<button class="sideButton" value="submit"><i class="fa-solid fa-file-invoice"></i>Account
+				Details</button>
+
+		</form>
+
+
+		<a th:href="@{cardPage}"><i class="fa-regular fa-credit-card"></i>Apply Credit Card</a>
+ 		
+ 		
+		 <a th:href="@{/pinPage}"><i class="fa-solid fa-key"></i>Set
+			PIN For Credit Card</a>  
+			
+	    <a th:href="@{/cibilPage}"><i class="fa-solid fa-gauge-high"></i>Check CIBIL Score</a>
+	    <a th:href="@{/shopPage}"><i class="fa-brands fa-shopify"></i>Shop With Card</a>
+	    <a th:href="@{/creditPointsPage}"><i class="fa-solid fa-star-half-stroke"></i>Credit Points</a>
+	     <a th:href="@{/statementPage}"><i class="fa-solid fa-tent-arrow-left-right"></i>Statement</a>
+	    
+	    <!-- <form action="ShopServlet" method="get">
+			<button class="sideButton" type="submit" value="submit"><i class="fa-solid fa-tent-arrow-left-right"></i>Statement</button>
+
+		</form> -->
+		<a href="#contact"><i class="fa-solid fa-tty"></i>Contact</a>
+
+		<form action="logout" method="post">
+			<button class="sideButton" value="submit"><i class="fa-solid fa-right-from-bracket"></i>Logout</button>
+
+		</form>
+
+
+	 <form th:action="@{/logout}" method="post">
+            <button class="sideButton" type="submit"><i class="fa-solid fa-right-from-bracket"></i>Logout</button>
+        </form>
+    </div>
+
+    <div class="main-content">
+        <div class="card" th:each="display : ${list}">
+            <div class="card-header"><b>Name</b></div>
+            <div class="card-content" th:text="${display.fName + ' ' + display.lName}"></div>
+        </div>
+        <div class="card" th:each="display : ${list}">
+            <div class="card-header"><b>Customer Id</b></div>
+            <div class="card-content" th:text="${display.customerID}"></div>
+        </div>
+        <div class="card" th:each="display : ${list}">
+            <div class="card-header"><b>Aadhaar Number</b></div>
+            <div class="card-content" th:text="${display.aadhaar}"></div>
+        </div>
+        <div class="card" th:each="display : ${list}">
+            <div class="card-header"><b>PAN</b></div>
+            <div class="card-content" th:text="${display.pan}"></div>
+        </div>
+        <div class="card" th:each="display : ${list}">
+            <div class="card-header"><b>Phone Number</b></div>
+            <div class="card-content">
+                <span th:text="${display.phone}"></span>
+                <input type="hidden" th:value="${display.phone}">
+            </div>
+        </div>
+        <div class="card" th:each="display : ${list}">
+            <div class="card-header"><b>Email</b></div>
+            <div class="card-content" th:text="${display.mail}"></div>
+        </div>
+    </div>
+
+
+</body>
+<style>
+
+i{
+padding-right:10px;
+}
+body, html {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f4;
+}
+
+.header {
+	background-color: rgb(20, 136, 236);
+	color: #fff;
+	height: 75px;
+	text-align: center;
+	position: fixed;
+	width: 100%;
+	z-index: 1000;
+}
+
+.header h1 {
+	margin-top: 6px;
+	margin-left:50px;
+}
+
+
+.sideButton {
+	height: 60px;
+	/* margin-left:12px; */
+	font-size: 17px;
+	background-color: rgb(138, 150, 174);
+	color: white;
+	border: 0;
+	cursor: pointer;
+	width: 250px;
+	height: 50px;
+	text-align: justify;
+	padding: 15px 20px;
+}
+
+.sideButton:hover {
+	background-color: #575757;
+}
+
+.sidebar {
+	height: 100%;
+	width: 250px;
+	position: fixed;
+	top: 60px;
+	left: 0;
+	background-color: rgb(138, 150, 174);
+	padding-top: 60px;
+	overflow-x: hidden;
+}
+
+.sidebar a {
+	padding: 15px 20px;
+	text-decoration: none;
+	font-size: 17px;
+	color: white;
+	display: block;
+}
+
+.sidebar a:hover {
+	background-color: #575757;
+}
+
+.main-content {
+	margin-left: 260px;
+	padding: 20px;
+	padding-top: 80px;
+	background-color: #f4f4f4;
+	min-height: 100vh;
+}
+
+.card {
+	background-color: #fff;
+	padding: 20px;
+	margin: 15px 0;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+}
+
+.card-header {
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
+.card-content {
+	font-size: 16px;
+}
+
+
+@media screen and (max-width: 768px) {
+	.sidebar {
+		width: 100%;
+		height: auto;
+		position: relative;
+	}
+	.sidebar a {
+		float: left;
+	}
+	.main-content {
+		margin-left: 0;
+		padding-top: 140px;
+	}
+}
+</style>
+</html>
